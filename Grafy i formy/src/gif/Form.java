@@ -28,21 +28,18 @@ public class Form {
 		graph = new SimpleWeightedGraph<Integer, DefaultWeightedEdge>(
 				DefaultWeightedEdge.class);
 		
+		
+		
 		ci = new ConnectivityInspector<Integer, DefaultWeightedEdge>(graph);
 	}
 	
-	public String toString() {		
+	public String toString() {
+		if (graph.vertexSet().isEmpty())
+			return "Forma jest pusta (???). To nie powinno siê zda¿yæ.";
 
 		return toString(graph);
 	}
 
-	public String printGramMatrix() {
-		String s = "[]";
-		
-		
-		return s;
-	}
-	
 	public double[][] getGramMatrix() {
 		int vertNum = graph.vertexSet().size();
 		double[][] gram = new double[vertNum][vertNum];
