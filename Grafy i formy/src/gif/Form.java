@@ -24,11 +24,20 @@ public class Form {
 		ci = new ConnectivityInspector<Integer, DefaultWeightedEdge>(graph);
 	}
 
-	public Form(Poset p) {
+	public Form(Poset poset) {
 		graph = new SimpleWeightedGraph<Integer, DefaultWeightedEdge>(
 				DefaultWeightedEdge.class);
 		
+		for (int v : poset.getVertices())
+			graph.addVertex(v);
 		
+		for (int i : poset.getIMinus())
+			for (int j : poset.lessThan(i))
+				graph.addEdge(i, j);
+		
+		for (int p : poset.getMaxI())
+			for (int i : poset.lessThan(p))
+				graph.setEdgeWeight(graph.addEdge(p, i), -1);
 		
 		ci = new ConnectivityInspector<Integer, DefaultWeightedEdge>(graph);
 	}
